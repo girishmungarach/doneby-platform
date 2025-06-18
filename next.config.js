@@ -59,18 +59,13 @@ const nextConfig = {
         source: '/http/:path*',
         destination: '/https/:path*',
         permanent: true,
-      },
-      {
-        source: 'https://www.doneby.in/:path*',
-        destination: 'https://doneby.in/:path*',
-        permanent: true,
       }
-    ]
+    ];
   },
 
   // Configure image domains
   images: {
-    domains: ['doneby.in', 'www.doneby.in'],
+    domains: ['localhost'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -79,11 +74,22 @@ const nextConfig = {
     ],
   },
 
+  // Production optimizations
   poweredByHeader: false,
   swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
+  // Output configuration
+  output: 'standalone',
+  
+  // Experimental features
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'doneby-platform.vercel.app'],
+    },
+  }
 };
 
 module.exports = nextConfig; 
