@@ -2,13 +2,13 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   // Supabase Configuration
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
+  DONEBY_PUBLIC_SUPABASE_URL: z.string().url().min(1),
+  DONEBY_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
 
   // Application Configuration
-  NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  DONEBY_PUBLIC_APP_URL: z.string().url().min(1),
+  NODE_ENV: z.enum(['development', 'production', 'test']),
   
   // Authentication
   AUTH_SECRET: z.string().min(1),
@@ -86,7 +86,8 @@ export function getBaseUrl() {
   if (typeof window !== 'undefined') {
     return window.location.origin;
   }
-  return process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const env = getEnv();
+  return env.DONEBY_PUBLIC_APP_URL;
 }
 
 /**
