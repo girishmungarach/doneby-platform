@@ -54,7 +54,7 @@ export default async function VerificationRequestPage({
         timelineEntry: entry,
         requester: profile,
         verifier: verification.verifier!,
-        verificationUrl: `${process.env.DONEBY_PUBLIC_APP_URL}/verification/${verification.id}`,
+        verificationUrl: `${process.env.NEXT_PUBLIC_DONEBY_APP_URL}/verification/${verification.id}`,
       })
 
       await sendEmail({

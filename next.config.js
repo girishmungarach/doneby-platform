@@ -5,7 +5,7 @@ const nextConfig = {
 
   // Configure environment variables
   env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_DONEBY_APP_URL: process.env.NEXT_PUBLIC_DONEBY_APP_URL,
   },
 
   // Configure headers for security
