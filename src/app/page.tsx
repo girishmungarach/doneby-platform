@@ -1,103 +1,100 @@
-import Image from "next/image";
+import { Button } from '@/components/ui/button';
+import Timeline from '@/components/timeline/Timeline';
+import { TimelineEntry, TimelineEntryType, VerificationStatus } from '@/lib/types/profile';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const mockTimelineEntries: TimelineEntry[] = [
+    {
+      id: '1',
+      profile_id: 'mock-profile-1',
+      type: 'work' as TimelineEntryType,
+      title: 'Senior Software Engineer',
+      description: 'Developed and maintained web applications using React and Node.js.',
+      start_date: '2020-01-15',
+      end_date: '2023-05-20',
+      is_current: false,
+      location: 'San Francisco, CA',
+      organization: 'Tech Solutions Inc.',
+      url: 'https://techsolutions.com',
+      metadata: {},
+      verification_status: 'verified' as VerificationStatus,
+      verification_count: 5,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      skills: [
+        { id: 's1', profile_id: 'mock-profile-1', skill_id: 'skill1', level: 'expert', endorsement_count: 10, created_at: new Date().toISOString(), updated_at: new Date().toISOString(), skill: { id: 'skill1', name: 'React', category: 'Frontend', description: 'React.js framework', created_at: new Date().toISOString() } },
+        { id: 's2', profile_id: 'mock-profile-1', skill_id: 'skill2', level: 'advanced', endorsement_count: 8, created_at: new Date().toISOString(), updated_at: new Date().toISOString(), skill: { id: 'skill2', name: 'Node.js', category: 'Backend', description: 'Node.js runtime', created_at: new Date().toISOString() } },
+      ],
+    },
+    {
+      id: '2',
+      profile_id: 'mock-profile-1',
+      type: 'education' as TimelineEntryType,
+      title: 'Master of Science in Computer Science',
+      description: 'Specialized in Artificial Intelligence and Machine Learning.',
+      start_date: '2018-09-01',
+      end_date: '2020-05-25',
+      is_current: false,
+      location: 'Stanford University, CA',
+      organization: 'Stanford University',
+      url: 'https://stanford.edu',
+      metadata: {},
+      verification_status: 'verified' as VerificationStatus,
+      verification_count: 3,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      skills: [
+        { id: 's3', profile_id: 'mock-profile-1', skill_id: 'skill3', level: 'expert', endorsement_count: 12, created_at: new Date().toISOString(), updated_at: new Date().toISOString(), skill: { id: 'skill3', name: 'Machine Learning', category: 'AI', description: 'ML Algorithms', created_at: new Date().toISOString() } },
+      ],
+    },
+    {
+      id: '3',
+      profile_id: 'mock-profile-1',
+      type: 'project' as TimelineEntryType,
+      title: 'DoneBy Professional Verification Platform',
+      description: 'Designed and developed a platform for professional verification.',
+      start_date: '2023-06-01',
+      is_current: true,
+      location: 'Remote',
+      organization: 'Self-Employed',
+      url: 'https://doneby.com',
+      metadata: {},
+      verification_status: 'pending' as VerificationStatus,
+      verification_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      skills: [
+        { id: 's4', profile_id: 'mock-profile-1', skill_id: 'skill4', level: 'advanced', endorsement_count: 5, created_at: new Date().toISOString(), updated_at: new Date().toISOString(), skill: { id: 'skill4', name: 'Next.js', category: 'Frontend', description: 'Next.js framework', created_at: new Date().toISOString() } },
+        { id: 's5', profile_id: 'mock-profile-1', skill_id: 'skill5', level: 'advanced', endorsement_count: 4, created_at: new Date().toISOString(), updated_at: new Date().toISOString(), skill: { id: 'skill5', name: 'Supabase', category: 'Backend', description: 'Supabase BaaS', created_at: new Date().toISOString() } },
+      ],
+    },
+    {
+      id: '4',
+      profile_id: 'mock-profile-1',
+      type: 'achievement' as TimelineEntryType,
+      title: 'Published Research Paper on AI Ethics',
+      description: 'Authored a paper exploring ethical considerations in AI development.',
+      start_date: '2019-11-01',
+      end_date: '2019-11-01',
+      is_current: false,
+      location: 'Remote',
+      organization: null,
+      url: null,
+      metadata: {},
+      verification_status: 'pending' as VerificationStatus,
+      verification_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      skills: [],
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className="text-4xl font-bold mb-8">Professional Timeline</h1>
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+        <Timeline timelineEntries={mockTimelineEntries} />
+      </div>
+    </main>
   );
 }
