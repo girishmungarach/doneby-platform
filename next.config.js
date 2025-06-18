@@ -5,8 +5,7 @@ const nextConfig = {
 
   // Configure environment variables
   env: {
-    // Add any environment variables that should be available at build time
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
 
   // Configure headers for security

@@ -7,8 +7,8 @@ const envSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
 
   // Application Configuration
-  NEXT_PUBLIC_APP_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'production', 'test']),
+  NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   
   // Authentication
   AUTH_SECRET: z.string().min(1),
@@ -18,8 +18,8 @@ const envSchema = z.object({
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().optional(),
   
   // Feature Flags
-  NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().transform((val) => val === 'true'),
-  NEXT_PUBLIC_ENABLE_FEATURE_X: z.string().transform((val) => val === 'true'),
+  NEXT_PUBLIC_ENABLE_ANALYTICS: z.string().transform((val) => val === 'true').default('false'),
+  NEXT_PUBLIC_ENABLE_FEATURE_X: z.string().transform((val) => val === 'true').default('false'),
   
   // External Services
   NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
@@ -86,7 +86,7 @@ export function getBaseUrl() {
   if (typeof window !== 'undefined') {
     return window.location.origin;
   }
-  return process.env.NEXT_PUBLIC_APP_URL;
+  return process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 }
 
 /**
